@@ -103,43 +103,51 @@ if page == "Upload Contract":
             st.markdown("---")
             
             if st.button("Save to Database"):
-                # Validate before saving
-                is_valid, errors, warnings = validate_contract(extracted_data)
+                # Check if file already exists
+                existing_contracts = db.get_all_contracts()
+                already_exists = any(c['filename'] == st.session_state.uploaded_filename for c in existing_contracts)
                 
-                # Show validation results
-                if errors:
-                    st.error("Validation Errors - Cannot Save:")
-                    for error in errors:
-                        st.error(f"  - {error}")
-                
-                if warnings:
-                    st.warning("Validation Warnings:")
-                    for warning in warnings:
-                        st.warning(f"  - {warning}")
-                
-                # Only save if no critical errors
-                if not errors:
-                    if warnings:
-                        st.info("Contract has warnings but will be saved. Please review manually.")
-                    
-                    try:
-                        contract_id = db.insert_contract(
-                            filename=st.session_state.uploaded_filename,
-                            contract_data=extracted_data
-                        )
-                        st.balloons()
-                        st.success(f"Contract saved successfully! (ID: {contract_id})")
-                        
-                        # Show validation summary
-                        if warnings:
-                            st.info(f"Saved with {len(warnings)} warning(s). Manual review recommended.")
-                        
-                        del st.session_state.extracted_data
-                        del st.session_state.uploaded_filename
-                    except Exception as e:
-                        st.error(f"Error saving: {str(e)}")
+                if already_exists:
+                    st.warning(f"Contract '{st.session_state.uploaded_filename}' already exists in database!")
+                    st.info("This file has already been processed. Use Contract History to view existing data.")
                 else:
-                    st.error("Cannot save contract with critical errors. Please fix issues first.")
+                    # Validate before saving
+                    is_valid, errors, warnings = validate_contract(extracted_data)
+                    
+                    # Show validation results
+                    if errors:
+                        st.error("Validation Errors - Cannot Save:")
+                        for error in errors:
+                            st.error(f"  - {error}")
+                    
+                    if warnings:
+                        st.warning("Validation Warnings:")
+                        for warning in warnings:
+                            st.warning(f"  - {warning}")
+                    
+                    # Only save if no critical errors
+                    if not errors:
+                        if warnings:
+                            st.info("Contract has warnings but will be saved. Please review manually.")
+                        
+                        try:
+                            contract_id = db.insert_contract(
+                                filename=st.session_state.uploaded_filename,
+                                contract_data=extracted_data
+                            )
+                            st.balloons()
+                            st.success(f"Contract saved successfully! (ID: {contract_id})")
+                            
+                            # Show validation summary
+                            if warnings:
+                                st.info(f"Saved with {len(warnings)} warning(s). Manual review recommended.")
+                            
+                            del st.session_state.extracted_data
+                            del st.session_state.uploaded_filename
+                        except Exception as e:
+                            st.error(f"Error saving: {str(e)}")
+                    else:
+                        st.error("Cannot save contract with critical errors. Please fix issues first.")
 
 elif page == "Contract History":
     st.markdown("---")
