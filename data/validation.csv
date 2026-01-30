@@ -167,3 +167,43 @@ Contract_ID,Filename,Field_Name,Extracted_Value,Actual_Value,Match,Notes
 21,TechCorp_Procurement_Contract.pdf,payment_terms,Invoices shall be submitted monthly and are payable within NET 30 days from the date of invoice rece...,,,
 21,TechCorp_Procurement_Contract.pdf,contract_type,Service Agreement,,,
 21,TechCorp_Procurement_Contract.pdf,key_deliverables,"Custom software development, Technical consulting and documentation, Ongoing support during the cont...",,,
+28,Informal_Contract.pdf,vendor_name,QuickDeal Suppliers,QuickDeal Suppliers,TRUE,Manually verified
+28,Informal_Contract.pdf,contract_number,,None,TRUE,Manually verified
+28,Informal_Contract.pdf,effective_date,,None,TRUE,Manually verified
+28,Informal_Contract.pdf,expiration_date,,one year,FALSE,Correction applied
+28,Informal_Contract.pdf,total_amount,$20k,around $20k give or take,FALSE,Correction applied
+28,Informal_Contract.pdf,payment_terms,Payment will be done monthly. Invoices should be paid when received or shortly after.,we'll invoice monthly,TRUE,Manually verified
+28,Informal_Contract.pdf,contract_type,purchase order,Purchase Order,TRUE,Manually verified
+28,Informal_Contract.pdf,key_deliverables,office stuff and supplies,office stuff and supplies,TRUE,Manually verified
+27,European_Format_Contract.pdf,vendor_name,Europa Trading GmbH,Europa Trading GmbH,TRUE,Manually Verified
+27,European_Format_Contract.pdf,contract_number,EUR-2024-777,EUR-2024-777,TRUE,Manually Verified
+27,European_Format_Contract.pdf,effective_date,2024-12-05,2024-12-05,TRUE,Manually Verified
+27,European_Format_Contract.pdf,expiration_date,2025-12-05,2025-12-05,TRUE,Manually Verified
+27,European_Format_Contract.pdf,total_amount,"85.500,00 €","85.500,00 €",TRUE,Manually Verified
+27,European_Format_Contract.pdf,payment_terms,Payment shall be made within 14 days of invoice date.,Payment shall be made within 14 days of invoice date.,TRUE,Manually Verified
+27,European_Format_Contract.pdf,contract_type,Supply Agreement,Supply Agreement,TRUE,Manually Verified
+27,European_Format_Contract.pdf,key_deliverables,Industrial equipment and parts.,Industrial equipment and parts.,TRUE,Manually Verified
+26,Confusing_Amounts_Contract.pdf,vendor_name,MultiPrice Solutions LLC,MultiPrice Solutions LLC,TRUE,Manually verified
+26,Confusing_Amounts_Contract.pdf,contract_number,,MULTI-2024-999,FALSE,Correction applied
+26,Confusing_Amounts_Contract.pdf,effective_date,2024-07-01,2024-07-01,TRUE,Manually verified
+26,Confusing_Amounts_Contract.pdf,expiration_date,2025-07-01,2025-07-01,TRUE,Manually verified
+26,Confusing_Amounts_Contract.pdf,total_amount,47000,"$47,000",TRUE,Manually verified
+26,Confusing_Amounts_Contract.pdf,payment_terms,The setup fee shall be due upfront prior to service activation. Monthly subscription fees shall be i...,"Setup fee upfront, monthly thereafter",TRUE,Manually verified
+26,Confusing_Amounts_Contract.pdf,contract_type,Software Subscription Agreement,Software Subscription Agreement,TRUE,Manually verified
+26,Confusing_Amounts_Contract.pdf,key_deliverables,Access to its Software-as-a-Service (SaaS) platform along with ongoing system support and maintenanc...,SaaS platform and support,TRUE,Manually verified
+25,Amendment_Contract.pdf,vendor_name,TechCorp Solutions,TechCorp Solutions,TRUE,Manually verified
+25,Amendment_Contract.pdf,contract_number,SVC-2023-500,SVC-2023-500-AMD2,FALSE,Correction applied
+25,Amendment_Contract.pdf,effective_date,2024-11-15,2024-11-15,TRUE,Manually verified
+25,Amendment_Contract.pdf,expiration_date,,None,TRUE,Manually verified
+25,Amendment_Contract.pdf,total_amount,125000,"$125,000",TRUE,Manually verified
+25,Amendment_Contract.pdf,payment_terms,NET 45 days from the date of invoice,NET 45 days,TRUE,Manually verified
+25,Amendment_Contract.pdf,contract_type,,Amendment to Service Agreement,FALSE,Correction applied
+25,Amendment_Contract.pdf,key_deliverables,additional cloud migration services,Cloud migration services,TRUE,Manually verified
+24,Ambiguous_Dates_Contract.pdf,vendor_name,Ambiguous Dates Corp,Ambiguous Dates Corp,TRUE,Manually Verified
+24,Ambiguous_Dates_Contract.pdf,contract_number,AMB-2024-111,AMB-2024-111,TRUE,Manually Verified
+24,Ambiguous_Dates_Contract.pdf,effective_date,2024-03-15,2024-03-15,TRUE,Manually Verified
+24,Ambiguous_Dates_Contract.pdf,expiration_date,2026-03-15,2026-03-15,TRUE,Manually Verified
+24,Ambiguous_Dates_Contract.pdf,total_amount,"$95,000","$95,000",TRUE,Manually Verified
+24,Ambiguous_Dates_Contract.pdf,payment_terms,NET 30 days from invoice date,NET 30 days from invoice date,TRUE,Manually Verified
+24,Ambiguous_Dates_Contract.pdf,contract_type,Service Agreement,Service Agreement,TRUE,Manually Verified
+24,Ambiguous_Dates_Contract.pdf,key_deliverables,The Vendor shall provide marketing and advertising services as mutually agreed upon by both parties.,The Vendor shall provide marketing and advertising services as mutually agreed upon by both parties.,TRUE,Manually Verified

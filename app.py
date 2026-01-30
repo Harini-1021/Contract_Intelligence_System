@@ -6,28 +6,15 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 from src.simple_extractor import extract_contract_simple
 from src.database import ContractDatabase
+from src.contract_validator import validate_contract
 
 st.set_page_config(
     page_title="Contract Intelligence System",
     page_icon="📄",
     layout="wide"
 )
-st.markdown("""
-    <style>
-    .main-header {
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: #1f77b4;
-    }
-    .stMetric {
-        background-color: #f0f2f6;
-        padding: 1rem;
-        border-radius: 0.5rem;
-    }
-    </style>
-""", unsafe_allow_html=True)
 
-st.markdown('<h1 class="main-header">Contract Intelligence System</h1>', unsafe_allow_html=True)
+st.title("Contract Intelligence System")
 
 st.markdown("""
 This application extracts key information from procurement contract PDFs.
@@ -46,7 +33,7 @@ st.sidebar.title("Navigation")
 
 page = st.sidebar.radio(
     "Go to:",
-    ["Upload Contract", "Contract History","Dashboard"]
+    ["Upload Contract", "Contract History", "Dashboard"]
 )
 
 st.sidebar.markdown("---")
@@ -116,17 +103,43 @@ if page == "Upload Contract":
             st.markdown("---")
             
             if st.button("Save to Database"):
-                try:
-                    contract_id = db.insert_contract(
-                        filename=st.session_state.uploaded_filename,
-                        contract_data=extracted_data
-                    )
-                    st.balloons()
-                    st.success(f"Contract saved successfully! (ID: {contract_id})")
-                    del st.session_state.extracted_data
-                    del st.session_state.uploaded_filename
-                except Exception as e:
-                    st.error(f"Error saving: {str(e)}")
+                # Validate before saving
+                is_valid, errors, warnings = validate_contract(extracted_data)
+                
+                # Show validation results
+                if errors:
+                    st.error("Validation Errors - Cannot Save:")
+                    for error in errors:
+                        st.error(f"  - {error}")
+                
+                if warnings:
+                    st.warning("Validation Warnings:")
+                    for warning in warnings:
+                        st.warning(f"  - {warning}")
+                
+                # Only save if no critical errors
+                if not errors:
+                    if warnings:
+                        st.info("Contract has warnings but will be saved. Please review manually.")
+                    
+                    try:
+                        contract_id = db.insert_contract(
+                            filename=st.session_state.uploaded_filename,
+                            contract_data=extracted_data
+                        )
+                        st.balloons()
+                        st.success(f"Contract saved successfully! (ID: {contract_id})")
+                        
+                        # Show validation summary
+                        if warnings:
+                            st.info(f"Saved with {len(warnings)} warning(s). Manual review recommended.")
+                        
+                        del st.session_state.extracted_data
+                        del st.session_state.uploaded_filename
+                    except Exception as e:
+                        st.error(f"Error saving: {str(e)}")
+                else:
+                    st.error("Cannot save contract with critical errors. Please fix issues first.")
 
 elif page == "Contract History":
     st.markdown("---")
@@ -234,6 +247,7 @@ elif page == "Contract History":
                     file_name=f"contracts_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
                     mime="application/json"
                 )
+
 elif page == "Dashboard":
     st.markdown("---")
     st.subheader("Analytics Dashboard")

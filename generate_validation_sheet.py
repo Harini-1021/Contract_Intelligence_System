@@ -1,10 +1,12 @@
 """
 Generate Validation Spreadsheet
 Creates CSV with all extracted data ready for manual verification
+Supports appending new contracts without overwriting existing data
 """
 
 from src.database import ContractDatabase
 import csv
+from pathlib import Path
 
 print("=" * 60)
 print("VALIDATION SPREADSHEET GENERATOR")
@@ -14,26 +16,33 @@ print()
 # Connect to database
 db = ContractDatabase()
 
-# Get all contracts
+# Get all contracts from database
 contracts = db.get_all_contracts()
 print(f"Found {len(contracts)} contracts in database")
+
+# Check if validation.csv already exists
+csv_path = 'data/validation.csv'
+existing_filenames = set()
+
+if Path(csv_path).exists():
+    print(f"Found existing validation.csv")
+    # Read existing filenames
+    with open(csv_path, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            existing_filenames.add(row['Filename'])
+    print(f"Already validated: {len(existing_filenames)} contracts")
+
+# Find NEW contracts not yet in validation
+new_contracts = [c for c in contracts if c['filename'] not in existing_filenames]
+print(f"New contracts to add: {len(new_contracts)}")
 print()
 
-# Prepare rows for CSV
-rows = []
-
-# Header row
-header = [
-    'Contract_ID',
-    'Filename', 
-    'Field_Name',
-    'Extracted_Value',
-    'Actual_Value',
-    'Match',
-    'Notes'
-]
-
-rows.append(header)
+if len(new_contracts) == 0:
+    print("✓ All contracts already in validation.csv")
+    print("✓ No new contracts to add")
+    db.close()
+    exit()
 
 # Fields to validate
 fields = [
@@ -47,10 +56,12 @@ fields = [
     'key_deliverables'
 ]
 
-# Generate rows for each contract
-contract_id = 1
-for contract in contracts:
+# Prepare new rows
+new_rows = []
+
+for contract in new_contracts:
     filename = contract['filename']
+    print(f"  Adding: {filename}")
     
     for field in fields:
         extracted_value = contract.get(field, 'NULL')
@@ -60,7 +71,7 @@ for contract in contracts:
             extracted_value = str(extracted_value)[:100] + "..."
         
         row = [
-            contract_id,
+            contract['id'],
             filename,
             field,
             extracted_value,
@@ -68,29 +79,38 @@ for contract in contracts:
             '',  # Match - YOU WILL FILL THIS  
             ''   # Notes - OPTIONAL
         ]
-        rows.append(row)
-    
-    contract_id += 1
+        new_rows.append(row)
 
-# Write to CSV
-csv_path = 'data/validation.csv'
+# If validation.csv doesn't exist, create it with header
+if not Path(csv_path).exists():
+    header = [
+        'Contract_ID',
+        'Filename', 
+        'Field_Name',
+        'Extracted_Value',
+        'Actual_Value',
+        'Match',
+        'Notes'
+    ]
+    with open(csv_path, 'w', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        writer.writerow(header)
+    print("Created new validation.csv")
 
-with open(csv_path, 'w', newline='', encoding='utf-8') as f:
+# Append new rows
+with open(csv_path, 'a', newline='', encoding='utf-8') as f:
     writer = csv.writer(f)
-    writer.writerows(rows)
+    writer.writerows(new_rows)
 
-print(f" Generated validation spreadsheet: {csv_path}")
 print()
-print(f" Total rows: {len(rows) - 1} (header not counted)")
-print(f" Contracts: {len(contracts)}")
-print(f" Fields per contract: {len(fields)}")
-print(f" Total checks needed: {len(contracts) * len(fields)}")
+print(f"✓ Added {len(new_rows)} rows to validation.csv")
+print(f"✓ New contracts added: {len(new_contracts)}")
 print()
 print("NEXT STEPS:")
-print("1. Open data/validation.csv in Excel or Google Sheets")
-print("2. For each row, check the PDF and fill in 'Actual_Value' column")
-print("3. Mark 'Match' as TRUE or FALSE")
-print("4. Add any notes if needed")
+print("1. Open data/validation.csv")
+print("2. Find the NEW contracts (at the bottom)")
+print("3. For each row, check the PDF and fill in 'Actual_Value'")
+print("4. Mark 'Match' as TRUE or FALSE")
 print()
 
 db.close()
