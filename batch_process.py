@@ -1,6 +1,3 @@
-"""
-Batch Contract Processor - Step 3: Process All Contracts
-"""
 
 import os
 from pathlib import Path
