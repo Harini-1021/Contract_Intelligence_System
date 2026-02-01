@@ -75,9 +75,9 @@ for contract in new_contracts:
             filename,
             field,
             extracted_value,
-            '',  # Actual_Value - YOU WILL FILL THIS
-            '',  # Match - YOU WILL FILL THIS  
-            ''   # Notes - OPTIONAL
+            '',  
+            '',   
+            ''   
         ]
         new_rows.append(row)
 
@@ -103,14 +103,8 @@ with open(csv_path, 'a', newline='', encoding='utf-8') as f:
     writer.writerows(new_rows)
 
 print()
-print(f"✓ Added {len(new_rows)} rows to validation.csv")
-print(f"✓ New contracts added: {len(new_contracts)}")
-print()
-print("NEXT STEPS:")
-print("1. Open data/validation.csv")
-print("2. Find the NEW contracts (at the bottom)")
-print("3. For each row, check the PDF and fill in 'Actual_Value'")
-print("4. Mark 'Match' as TRUE or FALSE")
+print(f" Added {len(new_rows)} rows to validation.csv")
+print(f" New contracts added: {len(new_contracts)}")
 print()
 
 db.close()
