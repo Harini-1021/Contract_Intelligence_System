@@ -46,7 +46,7 @@ with open(csv_path, 'r', encoding='utf-8') as f:
 if total_checked > 0:
     overall_accuracy = (total_correct / total_checked) * 100
 else:
-    print("⚠️  No validated rows found!")
+    print(" No validated rows found!")
     print("Make sure you filled in the 'Match' column (TRUE/FALSE)")
     exit()
 
