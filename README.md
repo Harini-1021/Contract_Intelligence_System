@@ -16,18 +16,26 @@ AI-powered procurement contract extraction system achieving 92.2% validated accu
 ## Screenshots
 
 ### Upload & Extraction
+<img width="1468" height="836" alt="Screenshot 2026-01-30 at 4 32 04 PM" src="https://github.com/user-attachments/assets/d142ccf9-9161-4bd9-8dde-88af9bfc1455" />
 
+<img width="1468" height="842" alt="Screenshot 2026-01-30 at 4 32 32 PM" src="https://github.com/user-attachments/assets/be31abef-901e-4f97-bafd-da5bbda256ec" />
 
 ### Duplicate Prevention
+<img width="1468" height="842" alt="Screenshot 2026-01-30 at 4 32 41 PM" src="https://github.com/user-attachments/assets/b00a965e-084a-4fd3-85f3-fa536ea32ad5" />
 
 
 ### Contract History
+<img width="1468" height="836" alt="Screenshot 2026-01-30 at 4 31 44 PM" src="https://github.com/user-attachments/assets/858e9498-da69-4979-8c30-b4357e35d984" /> 
+
+### Filter Functionality
+<img width="1468" height="836" alt="Screenshot 2026-01-30 at 4 31 44 PM" src="https://github.com/user-attachments/assets/2868dbb6-ccf1-428b-9126-735c7dc0be19" />
 
 
 ### Export Functionality
-
+<img width="1468" height="836" alt="Screenshot 2026-01-30 at 4 31 54 PM" src="https://github.com/user-attachments/assets/874d5594-53a5-4faf-b9ed-baebe9e48781" />
 
 ### Analytics Dashboard
+<img width="1468" height="836" alt="Screenshot 2026-01-30 at 4 31 20 PM" src="https://github.com/user-attachments/assets/899d89a4-688d-411c-bf65-8df4b4f3719f" />
 
 
 ## Tech Stack
