@@ -36,7 +36,7 @@ def extract_contract_simple(pdf_path: str) -> dict:
     # Get API key
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
-        raise ValueError("OPENAI_API_KEY not found in .env")
+        raise ValueError("OPENAI_API_KEY environment variable not set")
     
     # Extract text from PDF
     logger.info(f"Extracting text from: {pdf_path}")
