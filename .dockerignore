@@ -1,0 +1,27 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Environment
+.env
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+
+# Temp files
+temp_uploads/
+
+# Test files
+tests/
+test*.py
+
+# Other
+.DS_Store

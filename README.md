@@ -54,6 +54,11 @@ AI-powered procurement contract extraction system achieving 92.2% validated accu
 - Plotly (interactive charts)
 - Pandas (data manipulation)
 
+**DevOps & Deployment:**
+- Docker (containerization)
+- Docker Compose (orchestration)
+- Docker Hub (image registry)
+
 ## Installation
 
 ### Prerequisites
@@ -168,6 +173,9 @@ Validation runs automatically before database insertion and provides user-friend
 ## Project Structure
 ```
 Contract_Intelligence_System/
+├── Dockerfile                    # Docker image configuration
+├── docker-compose.yml            # Docker Compose orchestration
+├── .dockerignore                 # Files excluded from Docker image
 ├── src/
 │   ├── simple_extractor.py      # AI extraction logic
 │   ├── database.py               # Database operations
@@ -176,11 +184,13 @@ Contract_Intelligence_System/
 ├── data/
 │   ├── contracts.db              # SQLite database
 │   └── contracts/                # Sample PDFs
+├── screenshots/                  # UI screenshots
 ├── app.py                        # Streamlit web application
 ├── requirements.txt              # Python dependencies
 ├── .env.example                  # Environment template
 ├── .gitignore                    # Git ignore rules
 └── README.md                     # This file
+```
 ```
 
 ## Known Limitations
